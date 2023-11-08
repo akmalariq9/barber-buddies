@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('operating_hours');
             $table->text('description');
-            $table->boolean('toko')->default(true);
             $table->timestamps();
         });        
     }
