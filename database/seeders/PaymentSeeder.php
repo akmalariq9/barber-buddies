@@ -4,18 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use App\Models\Payment;
 
-class UserSeeder extends Seeder
+class PaymentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        User::factory(10)->create([
-            'role' => 'Client', // Ganti dengan 'Owner' jika diperlukan
-        ]);
+        //
+        Payment::factory(40)->create();
     }
 }
