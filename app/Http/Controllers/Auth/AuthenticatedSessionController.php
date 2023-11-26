@@ -20,6 +20,11 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
+    public function createbarber(): View
+    {
+        return view('barbershop.login');
+    }
+
     /**
      * Handle an incoming authentication request.
      */
@@ -29,6 +34,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }
+
+    public function storebarber(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate('barbershop');
+
+        $request->session()->regenerate();
+        
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

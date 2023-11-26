@@ -19,6 +19,14 @@ return new class extends Migration
             $table->foreignId('reservation_id')->constrained();
             $table->timestamps();
         });
+
+        Schema::create('payment_items', function (Blueprint $table) {
+            $table->id();
+            $table->decimal('amount', 8, 2);
+            $table->foreignId('payment_id')->constrained('payments');
+            $table->foreignId('service_id')->constrained('services');
+            $table->timestamps();
+        });
     }
 
     /**

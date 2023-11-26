@@ -9,7 +9,7 @@ class Reservation extends Model
 {
     use HasFactory;
     protected $fillable = ['status', 'reservation_datetime', 'additional_notes', 'user_id', 'barber_shop_id', 'service_id'];
-
+    
     public function user()
     {
         return $this->belongsTo(User::class);

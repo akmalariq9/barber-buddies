@@ -17,7 +17,8 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price', 8, 2);
             $table->integer('duration'); // Durasi dalam menit
-            $table->foreignId('barber_shop_id')->constrained('barber_shops');
+            $table->unsignedBigInteger('barber_shop_id');
+            $table->foreign('barber_shop_id')->references('id')->on('barber_shops');
             $table->timestamps();
         });
     }

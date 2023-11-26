@@ -18,12 +18,25 @@ class ServiceFactory extends Factory
      */
     public function definition(): array
     {
+        $serviceNames = [
+            'Haircut services',
+            'Beard trimming',
+            'Shaving',
+            'Hair styling',
+            'Hot towel treatment',
+            'Head massage',
+            'Facial treatments',
+            'Coloring services',
+            'Hair wash and conditioning',
+            'Consultation for hairstyle recommendations'
+        ];
+    
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->randomElement($serviceNames),
             'description' => $this->faker->text,
             'price' => $this->faker->randomFloat(2, 10, 100),
             'duration' => $this->faker->numberBetween(30, 180),
-            'barber_shop_id' => $this->faker->numberBetween(1, 10),
+            'barber_shop_id' => $this->faker->numberBetween(1, 20),
         ];
     }
 }

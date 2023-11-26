@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Capster extends Model
+class BarberShopSchedule extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'phone_number', 'description', 'barber_shop_id'];
+
+    protected $fillable = ['barber_shop_id', 'day', 'opening_hours', 'closing_hours'];
 
     public function barberShop()
     {
         return $this->belongsTo(BarberShop::class);
-    }
-
-    public function schedules()
-    {
-        return $this->hasMany(CapsterSchedule::class);
     }
 }

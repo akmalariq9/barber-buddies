@@ -13,43 +13,81 @@
         <label for="nama">Nama:</label>
         <input type="text" name="nama" required>
 
-        <label for="barbershop">Barber Shop:</label>
-        <select name="barbershop" id="barbershop" required>
+        <label for="barber_shop_id">Barber Shop:</label>
+        <select name="barber_shop_id" id="barber_shop_id" required>
             <option value="" disabled selected>Pilih Barber Shop</option>
             @foreach($barberShops as $barberShop)
                 <option value="{{ $barberShop->id }}">{{ $barberShop->name }}</option>
             @endforeach
         </select>
 
-        <label for="capster">Capster:</label>
-        <select name="capster" id="capster" required>
-            <!-- Options will be dynamically populated based on the selected barber shop using JavaScript -->
+        {{-- Make status dropdown from database --}}
+        <label for="status">Status:</label>
+        <select name="status" id="status" required>
+            <option value="" disabled selected>Pilih Status</option>
+            @foreach($statuses as $status)
+                <option value="{{ $status }}">{{ $status }}</option>
+            @endforeach
         </select>
+
+        {{-- Make reservation datetime --}}
+        <label for="reservation_datetime">Reservation Datetime:</label>
+        <input type="datetime-local" name="reservation_datetime" required>
+
+        {{-- Select service --}}
+        <label for="service_id">Service:</label>
+        <select name="service_id" id="service_id" required disabled>
+            <option value="" disabled selected>Pilih Service</option>
+            @foreach($services as $service)
+                <option value="{{ $service->id }}" data-barbershop="{{ $service->barber_shop_id }}">{{ $service->name }}</option>
+            @endforeach
+        </select>
+        
+        {{-- Make Additional Notes --}}
+        <label for="additional_notes">Additional Notes:</label>
+        <textarea name="additional_notes" required></textarea>
 
         <button type="submit">Reservasi</button>
     </form>
 
     <script>
-        // AJAX to populate capster dropdown based on selected barber shop
-        document.getElementById('barbershop').addEventListener('change', function() {
-            var selectedBarberShopId = this.value;
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get references to the barber shop and service dropdowns
+            var barberShopDropdown = document.getElementById('barber_shop_id');
+            var serviceDropdown = document.getElementById('service_id');
 
-            // Fetch capsters based on selected barber shop
-            fetch('/get-capsters/' + selectedBarberShopId)
-                .then(response => response.json())
-                .then(data => {
-                    var capsterDropdown = document.getElementById('capster');
-                    capsterDropdown.innerHTML = '<option value="" disabled selected>Pilih Capster</option>';
+            // Store the original service options HTML for later use
+            var originalServiceOptions = serviceDropdown.innerHTML;
 
-                    data.capsters.forEach(function(capster) {
-                        var option = document.createElement('option');
-                        option.value = capster.id;
-                        option.text = capster.name;
-                        capsterDropdown.add(option);
+            // Add an event listener to the barber shop dropdown
+            barberShopDropdown.addEventListener('change', function () {
+                // Get the selected barber shop ID
+                var selectedBarberShopId = barberShopDropdown.value;
+
+                // Filter the service options based on the selected barber shop
+                if (selectedBarberShopId) {
+                    // Reset the service dropdown to its original options
+                    serviceDropdown.innerHTML = originalServiceOptions;
+
+                    // Show only the options related to the selected barber shop
+                    var options = serviceDropdown.querySelectorAll('option');
+                    options.forEach(function (option) {
+                        var associatedBarberShopId = option.getAttribute('data-barbershop');
+                        if (associatedBarberShopId !== selectedBarberShopId) {
+                            option.remove();
+                        }
                     });
-                });
+
+                    // Enable the service dropdown
+                    serviceDropdown.disabled = false;
+                } else {
+                    // If no barber shop is selected, reset the service dropdown
+                    serviceDropdown.innerHTML = originalServiceOptions;
+                    // Disable the service dropdown
+                    serviceDropdown.disabled = true;
+                }
+            });
         });
     </script>
-
 </body>
 </html>

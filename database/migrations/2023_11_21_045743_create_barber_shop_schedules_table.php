@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('capsters', function (Blueprint $table) {
+        Schema::create('barber_shop_schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone_number');
-            $table->text('description');
-            $table->foreignId('barber_shop_id')->constrained('barber_shops');
+            $table->foreignId('barber_shop_id')->constrained();
+            $table->enum('Day', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
+            $table->time('Opening_Hours');
+            $table->time('Closing_Hours');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('capsters');
+        Schema::dropIfExists('barbershop_schedule');
     }
 };

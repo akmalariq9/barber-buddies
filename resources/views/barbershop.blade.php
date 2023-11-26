@@ -1,63 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barbershop</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-900 text-white font-sans">
 
-    <h1>Daftar Pelanggan</h1>
+    <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-8 text-red-500">Daftar Barber</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>address</th>
-                <th>phone_number</th>
-                <th>operating_hours</th>
-                <th>description</th>
-            </tr>
-        </thead>
-        <tbody>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($pelanggan as $p)
-            <tr>
-                <td>{{ $p->id }}</td>
-                <td>{{ $p->name }}</td>
-                <td>{{ $p->address }}</td>
-                <td>{{ $p->phone_number }}</td>
-                <td>{{ $p->operating_hours }}</td>
-                <td>{{ $p->description }}</td>
-                <!-- <td>{{ $p->umur }}</td> -->
-            </tr>
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <p class="text-lg font-bold text-red-500 mb-4">{{ $p->name }}</p>
+                <p class="text-gray-400 mb-2">{{ $p->address }}</p>
+                <p class="text-gray-400">{{ $p->description }}</p>
+            </div>
             @endforeach
-        </tbody>
-    </table>
-
-    <h1>Daftar Capster</h1>
-
-    <table border="1">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>phone_number</th>
-                <th>description</th>
-                <td>barber shop</td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($capster as $c)
-            <tr>
-                <td>{{ $c->id }}</td>
-                <td>{{ $c->name }}</td>
-                <td>{{ $c->phone_number }}</td>
-                <td>{{ $c->description }}</td>
-                <td>{{ $c->barberShop->name }}</td>
-                <!-- <td>{{ $p->umur }}</td> -->
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+        </div>
+    </div>
 
 </body>
 </html>

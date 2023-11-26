@@ -16,7 +16,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'), 
             'phone_number' => $this->faker->phoneNumber,
-            'role' => $this->faker->randomElement(['Client', 'Owner']),
+            'role' => $this->faker->randomElement(['Client', 'Barbershop']),
         ];
     }
 }

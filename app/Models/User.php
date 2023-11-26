@@ -15,9 +15,9 @@ class User extends Authenticatable
 
     protected $hidden = ['password', 'remember_token'];
 
-    public function barberShops()
+    public function barbershop()
     {
-        return $this->hasMany(BarberShop::class);
+        return $this->hasOne(Barbershop::class);
     }
 
     public function reservations()
@@ -29,33 +29,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
-    // /**
-    //  * The attributes that are mass assignable.
-    //  *
-    //  * @var array<int, string>
-    //  */
-    // protected $fillable = [
-    //     'name',
-    //     'email',
-    //     'password',
-    // ];
-
-    // /**
-    //  * The attributes that should be hidden for serialization.
-    //  *
-    //  * @var array<int, string>
-    //  */
-    // protected $hidden = [
-    //     'password',
-    //     'remember_token',
-    // ];
-
-    // /**
-    //  * The attributes that should be cast.
-    //  *
-    //  * @var array<string, string>
-    //  */
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    //     'password' => 'hashed',
 }
