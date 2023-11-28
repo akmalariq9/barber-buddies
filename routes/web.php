@@ -41,19 +41,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::get('/barbershop/register', [BarberShopController::class, 'showRegistrationForm']);
-Route::get('/barbershop/add-service', [ServiceController::class, 'showServiceForm']);
-Route::post('/barbershop/add-service', [ServiceController::class, 'addservice'])->name('add-service');
+Route::get('/barbershop/add-service', [ServiceController::class, 'showServiceForm'])->middleware('barbershop');
+Route::post('/barbershop/add-service', [ServiceController::class, 'addservice'])->name('add-service')->middleware('barbershop');
 
-Route::get('/barbershop/add-payment', [AvailablePaymentController::class, 'showPaymentForm']);
-Route::post('/barbershop/add-payment', [AvailablePaymentController::class, 'addpayment'])->name('add-payment');
+Route::get('/barbershop/add-payment', [AvailablePaymentController::class, 'showPaymentForm'])->middleware('barbershop');
+Route::post('/barbershop/add-payment', [AvailablePaymentController::class, 'addpayment'])->name('add-payment')->middleware('barbershop');
 
 Route::get('/barbershop/register', [BarberShopController::class, 'create']);
 Route::post('/barbershop/register', [BarberShopController::class, 'store'])->name('barbershop-register');
 
+Route::get('/barbershop/{barberShop}/edit', [BarberShopController::class, 'edit'])->name('barbershop.edit')->middleware('barbershop');
+Route::put('/barbershop/{barberShop}', [BarberShopController::class, 'update'])->name('barbershop.update')->middleware('barbershop');
 Route::get('/barbershop/{barberShop}', [BarberShopController::class, 'show'])->name('barbershop.show');
-Route::get('/barbershop/{barberShop}/edit', [BarberShopController::class, 'edit'])->name('barbershop.edit');
-Route::put('/barbershop/{barberShop}', [BarberShopController::class, 'update'])->name('barbershop.update');
 
 Route::get('/payments/create/{reservation}', [PaymentController::class, 'create'])->name('payment.form');
 Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');

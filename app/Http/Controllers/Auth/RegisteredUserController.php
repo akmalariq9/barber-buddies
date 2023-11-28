@@ -49,6 +49,13 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        //if ($user->role == 'Barbershop') direct to barbershop register
+        if ($user->role == 'Barbershop') {
+            return redirect()->route('barbershop-register');
+        }
+        else {
+            return redirect()->route('landing');
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 }

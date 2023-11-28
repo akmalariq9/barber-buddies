@@ -16,7 +16,7 @@ class BarbershopAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role == 'barbershop') {
+        if (Auth::check() && Auth::user()->role == 'Barbershop') {
             return $next($request);
         } else {
             return redirect()->route('login');

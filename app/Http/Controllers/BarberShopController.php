@@ -51,13 +51,13 @@ class BarbershopController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            // Add validation rules for other fields
         ]);
 
         $barberShop->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            // Update other fields as needed
+            'address' => $request->input('address'),
+            'worker' => $request->input('worker'),
         ]);
 
         return redirect()->route('barbershop.show', $barberShop)->with('success', 'Profile updated successfully');

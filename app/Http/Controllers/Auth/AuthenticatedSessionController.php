@@ -34,7 +34,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->route('landing');
     }
 
     public function storebarber(LoginRequest $request): RedirectResponse
@@ -43,7 +44,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->route('landing');
     }
 
     /**

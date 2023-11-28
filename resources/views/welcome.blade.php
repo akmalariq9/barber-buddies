@@ -1,28 +1,43 @@
-<!-- resources/views/welcome.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BarberBuddies</title>
-    <!-- <link href='css/app.css' rel="stylesheet"> -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
-    
-    <nav class="bg-blue-500 p-4 text-white">
+<body class="font-sans antialiased bg-gray-100">
+
+    <!-- Navigation -->
+    <nav class="bg-gray-800 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold">BarberBuddies</h1>
             <div>
-                <a href="/login" class="mr-4">Login</a>
-                <a href="/register">Register</a>
-    
+                {{-- i want to show login and register just if user not login --}}
+                @guest
+                <a href="/login" class="text-blue-300 hover:underline">Login</a>
+                <a href="/register" class="text-blue-300 hover:underline ml-4">Register</a>
+                @endguest
+
                 <!-- Include links to view and edit profile -->
                 @if(auth()->check() && auth()->user()->barberShop)
-                    <a href="{{ route('barbershop.show', auth()->user()->barberShop) }}" class="mr-4">View Profile</a>
-                    <a href="{{ route('barbershop.edit', auth()->user()->barberShop) }}">Edit Profile</a>
+                    <a href="{{ route('barbershop.show', auth()->user()->barberShop) }}" class="text-blue-300 hover:underline ml-4">View Profile</a>
+                    <a href="{{ route('barbershop.edit', auth()->user()->barberShop) }}" class="text-blue-300 hover:underline ml-4">Edit Profile</a>
+                    <form action="/logout" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-blue-300 hover:underline ml-4">Logout</button>
+                    </form>
                 @endif
+
+                {{-- i want to dashboard and logout if role == client --}}
+                @if(auth()->check() && auth()->user()->role == 'Client')
+                    <a href="{{ route('dashboardz') }}" class="text-blue-300 hover:underline ml-4">Dashboard</a>
+                    <form action="/logout" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-blue-300 hover:underline ml-4">Logout</button>
+                </form>
+                @endif
+
             </div>
         </div>
     </nav>
@@ -34,7 +49,7 @@
     </section>
 
     <!-- Section: Features -->
-    <section class="py-16">
+    <section class="py-16 bg-gray-100">
         <div class="container mx-auto text-center">
             <h2 class="text-3xl font-bold mb-8">Discover BarberBuddies Features</h2>
 
@@ -77,6 +92,5 @@
         </p>
     </section>
 
-    <!-- <script src="{{ mix('js/app.js') }}"></script> -->
 </body>
 </html>
