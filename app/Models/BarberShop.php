@@ -36,4 +36,9 @@ class BarberShop extends Model implements AuthenticatableContract
     {
         return $this->hasMany(Service::class);
     }
+
+    public function availablePayments()
+    {
+        return $this->hasMany(AvailablePayment::class);
+    }
 }

@@ -8,11 +8,13 @@ use App\Models\Capster;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\Api\ReservasiApiController;
+use App\Http\Controllers\AvailablePaymentController;
 use App\Http\Controllers\BarberShopController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Service;
 use App\Http\Controllers\BarbershopAuthController;
 use App\Http\Controllers\PaymentController;
+use App\Models\AvailablePayment;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +44,13 @@ Route::middleware('auth')->group(function () {
 // Route::get('/barbershop/register', [BarberShopController::class, 'showRegistrationForm']);
 Route::get('/barbershop/add-service', [ServiceController::class, 'showServiceForm']);
 Route::post('/barbershop/add-service', [ServiceController::class, 'addservice'])->name('add-service');
+
+Route::get('/barbershop/add-payment', [AvailablePaymentController::class, 'showPaymentForm']);
+Route::post('/barbershop/add-payment', [AvailablePaymentController::class, 'addpayment'])->name('add-payment');
+
 Route::get('/barbershop/register', [BarberShopController::class, 'create']);
 Route::post('/barbershop/register', [BarberShopController::class, 'store'])->name('barbershop-register');
+
 Route::get('/barbershop/{barberShop}', [BarberShopController::class, 'show'])->name('barbershop.show');
 Route::get('/barbershop/{barberShop}/edit', [BarberShopController::class, 'edit'])->name('barbershop.edit');
 Route::put('/barbershop/{barberShop}', [BarberShopController::class, 'update'])->name('barbershop.update');
