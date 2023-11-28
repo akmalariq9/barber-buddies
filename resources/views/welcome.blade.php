@@ -10,6 +10,22 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
+    
+    <nav class="bg-blue-500 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">BarberBuddies</h1>
+            <div>
+                <a href="/login" class="mr-4">Login</a>
+                <a href="/register">Register</a>
+    
+                <!-- Include links to view and edit profile -->
+                @if(auth()->check() && auth()->user()->barberShop)
+                    <a href="{{ route('barbershop.show', auth()->user()->barberShop) }}" class="mr-4">View Profile</a>
+                    <a href="{{ route('barbershop.edit', auth()->user()->barberShop) }}">Edit Profile</a>
+                @endif
+            </div>
+        </div>
+    </nav>
 
     <!-- Section: Welcome -->
     <section class="bg-blue-500 text-white py-20 text-center">

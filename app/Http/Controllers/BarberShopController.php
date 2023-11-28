@@ -35,4 +35,31 @@ class BarbershopController extends Controller
 
         return redirect()->route('dashboardz')->with('success', 'Barbershop created successfully!');
     }
+
+    public function show(BarberShop $barberShop)
+    {
+        return view('barbershop.show', compact('barberShop'));
+    }
+
+    public function edit(BarberShop $barberShop)
+    {
+        return view('barbershop.edit', compact('barberShop'));
+    }
+
+    public function update(Request $request, BarberShop $barberShop)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            // Add validation rules for other fields
+        ]);
+
+        $barberShop->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            // Update other fields as needed
+        ]);
+
+        return redirect()->route('barbershop.show', $barberShop)->with('success', 'Profile updated successfully');
+    }
 }

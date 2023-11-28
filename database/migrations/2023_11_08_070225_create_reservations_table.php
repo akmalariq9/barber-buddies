@@ -16,9 +16,11 @@ return new class extends Migration
             $table->enum('status', ['Pending', 'Confirmed', 'Canceled', 'Completed'])->default('Pending');
             $table->dateTime('reservation_datetime');
             $table->text('additional_notes')->nullable();
+            $table->decimal('total_amount', 8, 2);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('barber_shop_id')->constrained('barber_shops');
             $table->foreignId('service_id')->constrained('services');
+            //Add total_amount for every transaction
             $table->timestamps();
         });        
     }

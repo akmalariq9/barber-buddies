@@ -58,9 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
-    Route::get('/barbershop/register', [BarberShopController::class, 'create']);
+    // Route::get('/barbershop/register', [BarberShopController::class, 'create']);
     
-    Route::post('/barbershop/register', [BarberShopController::class, 'store'])->name('barbershop-register');
+    // Route::post('/barbershop/register', [BarberShopController::class, 'store'])->name('barbershop-register');
 });
 
 // Route::middleware('guest')->group(function () {

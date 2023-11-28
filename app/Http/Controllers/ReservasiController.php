@@ -22,8 +22,9 @@ class ReservasiController extends Controller
 
     public function store(Request $request)
     {
+        $total_amount = Service::where('id', $request->service_id)->first()->price;
         // dd($request->all());
-        Reservation::create([
+        $reservation = Reservation::create([
             'name' => $request->name,
             'barber_shop_id' => $request->barber_shop_id,
             'status' => $request->status,
@@ -31,8 +32,10 @@ class ReservasiController extends Controller
             'service_id' => $request->service_id,
             'additional_notes' => $request->additional_notes,
             'user_id' => auth()->user()->id,
+            'total_amount' => $total_amount,
         ]);
-
-        return redirect()->back()->with('success', 'Reservasi berhasil disimpan.');
+        // dd('success');
+        // return redirect()->back()->with('success', 'Reservasi berhasil disimpan.');
+        return redirect()->route('payment.form', ['reservation' => $reservation->id]);
     }
 }
