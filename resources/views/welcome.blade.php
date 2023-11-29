@@ -31,10 +31,12 @@
 
                 {{-- i want to dashboard and logout if role == client --}}
                 @if(auth()->check() && auth()->user()->role == 'Client')
-                    <a href="{{ route('dashboardz') }}" class="text-blue-300 hover:underline ml-4">Dashboard</a>
-                    <form action="/logout" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class="text-blue-300 hover:underline ml-4">Logout</button>
+                <a href="{{ route('reservasi.store') }}" class="text-blue-300 hover:underline ml-4">Book!</a>
+                <a href="{{ route('dashboard') }}" class="text-blue-300 hover:underline ml-4">See our Partner</a>
+                <a href="{{ route('dashboardz') }}" class="text-blue-300 hover:underline ml-4">Dashboard</a>
+                <form action="/logout" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="text-blue-300 hover:underline ml-4">Logout</button>
                 </form>
                 @endif
 

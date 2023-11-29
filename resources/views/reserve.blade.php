@@ -10,9 +10,6 @@
     <form action="{{ route('reservasi.store') }}" method="POST">
         @csrf
 
-        <label for="nama">Nama:</label>
-        <input type="text" name="nama" required>
-
         <label for="barber_shop_id">Barber Shop:</label>
         <select name="barber_shop_id" id="barber_shop_id" required>
             <option value="" disabled selected>Pilih Barber Shop</option>
@@ -22,13 +19,13 @@
         </select>
 
         {{-- Make status dropdown from database --}}
-        <label for="status">Status:</label>
+        {{-- <label for="status">Status:</label>
         <select name="status" id="status" required>
             <option value="" disabled selected>Pilih Status</option>
             @foreach($statuses as $status)
                 <option value="{{ $status }}">{{ $status }}</option>
             @endforeach
-        </select>
+        </select> --}}
 
         {{-- Make reservation datetime --}}
         <label for="reservation_datetime">Reservation Datetime:</label>

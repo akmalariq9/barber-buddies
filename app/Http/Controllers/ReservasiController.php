@@ -7,6 +7,7 @@ use App\Models\Capster;
 use App\Models\Reservation;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 class ReservasiController extends Controller
@@ -23,19 +24,40 @@ class ReservasiController extends Controller
     public function store(Request $request)
     {
         $total_amount = Service::where('id', $request->service_id)->first()->price;
-        // dd($request->all());
         $reservation = Reservation::create([
-            'name' => $request->name,
+            'name' => auth()->user()->name,
             'barber_shop_id' => $request->barber_shop_id,
-            'status' => $request->status,
+            'status' => 'Pending',
             'reservation_datetime' => $request->reservation_datetime,
             'service_id' => $request->service_id,
             'additional_notes' => $request->additional_notes,
             'user_id' => auth()->user()->id,
             'total_amount' => $total_amount,
         ]);
-        // dd('success');
-        // return redirect()->back()->with('success', 'Reservasi berhasil disimpan.');
         return redirect()->route('payment.form', ['reservation' => $reservation->id]);
+    }
+
+    public function show(Reservation $reservation)
+    {
+        $barbershopId = auth()->user()->barbershop->id;
+        //make $reservations get from barbershop_id to name
+        // $reservations = Reservation::where('barber_shop_id', $barbershopId)->get();
+        
+        $reservations = DB::table('reservations')->join('users', 'reservations.user_id', '=', 'users.id')->select('reservations.*', 'users.name')->where('barber_shop_id', $barbershopId)->get();
+
+        // dd($reservations);
+        return view('reservation.show', ['reservations' => $reservations]);
+    }
+
+    public function update(Request $request, Reservation $reservation)
+    {
+        $request->validate([
+            'status' => 'required',
+        ]);
+
+        $reservation->update([
+            'status' => $request->status,
+        ]);
+        return redirect()->route('reservation.show', ['reservation' => $reservation->id])->with('success', 'Status reservasi berhasil diubah.');
     }
 }

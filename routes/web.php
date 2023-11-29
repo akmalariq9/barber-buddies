@@ -15,6 +15,7 @@ use App\Models\Service;
 use App\Http\Controllers\BarbershopAuthController;
 use App\Http\Controllers\PaymentController;
 use App\Models\AvailablePayment;
+use App\Models\Reservation;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,13 +64,17 @@ Route::get('/barber', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/reservation-list', function () {
+    return view('reservation.show', [
+        'reservasi' =>  Reservation::all()->collect(),
+    ]);
+})->middleware('barbershop')->name('reservation-list');
+
 Route::controller(ReservasiController::class)->group(function () {
-    Route::get('/get-capsters/{capster}', 'getCapster');
-    Route::get('/reservasi', 'index');
     Route::post('/reservasi', 'store')->name('reservasi.store');
+    Route::get('/reservasi', 'index');
+    Route::get('/barbershop/{barbershop}/reservasi', 'show')->name('reservasi.show');
 });
 
-
-Route::post('/reservasi', [ReservasiController::class, 'store'])->name('reservasi.store');
 
 require __DIR__.'/auth.php';

@@ -32,6 +32,6 @@ class ServiceController extends Controller
             'duration' => $request->duration,
             'barber_shop_id' => $barbershop->id,
         ]);
-        return redirect()->route('dashboardz')->with('success', 'Service added successfully!');
+        return redirect()->route('landing');
     }
 }
