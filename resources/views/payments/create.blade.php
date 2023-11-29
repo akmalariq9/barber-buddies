@@ -18,6 +18,12 @@
     <form action="{{ route('payments.store') }}" method="post" class="bg-gray-700 p-6 rounded-lg shadow-md w-full max-w-md">
         @csrf
 
+        {{-- Show the total amount --}}
+        <div class="mb-4">
+            <label for="total_amount" class="text-white block mb-1">Total Amount:</label>
+            <input type="text" name="total_amount" value="{{ $reservation->total_amount }}" readonly class="w-full px-4 py-2 rounded-md border bg-gray-800 text-white focus:outline-none cursor-not-allowed opacity-50">
+        </div>
+
         <div class="mb-4">
             <label for="payment_method" class="text-white block mb-1">Payment Method:</label>
             <select name="payment_method" required class="w-full px-4 py-2 rounded-md border bg-gray-800 text-white focus:outline-none focus:border-blue-500">

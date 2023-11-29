@@ -8,6 +8,8 @@ use App\Models\AvailablePayment;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\DB;
+
 // use App\Models\AvailablePayment; // Tambahkan ini
 
 class PaymentController extends Controller
@@ -22,10 +24,14 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
+        //join payment table with reservation, so i can create a total amount form
+        $total_amount = DB::table('payments')->join('reservations', 'payments.reservation_id', '=', 'reservations.id')->select('payments.*', 'reservations.total_amount')->where('reservation_id', $request->reservation_id)->first();
+
         Payment::create([
             'payment_method' => $request->payment_method,
             'payment_date' => $request->payment_date,
             'reservation_id' => $request->reservation_id,
+            'total_amount' => $total_amount->total_amount,
         ]);
         return redirect()->route('landing');
     }

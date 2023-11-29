@@ -13,11 +13,13 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($pelanggan as $p)
-            <div class="bg-gray-800 p-6 rounded-lg">
-                <p class="text-lg font-bold text-red-500 mb-4">{{ $p->name }}</p>
-                <p class="text-gray-400 mb-2">{{ $p->address }}</p>
-                <p class="text-gray-400">{{ $p->description }}</p>
-            </div>
+                <a href="{{ route('barbershop.show', ['barberShop' => $p->id]) }}" class="hover:underline focus:outline-none focus:ring focus:border-blue-300">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <p class="text-lg font-bold text-red-500 mb-4">{{ $p->name }}</p>
+                        <p class="text-gray-400 mb-2">{{ $p->address }}</p>
+                        <p class="text-gray-400">{{ $p->description }}</p>
+                    </div>
+                </a>
             @endforeach
         </div>
     </div>

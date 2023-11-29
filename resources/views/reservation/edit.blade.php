@@ -29,7 +29,7 @@ $statusOptions = [
                     <form method="POST" action="{{ route('reservasi.update', ['barbershop' => $barbershop, 'reservasi' => $reservasi]) }}">
                         @csrf
                         @method('PUT')
-    
+                        
                         <div class="mb-4">
                             <x-label for="status" :value="__('Status')" />
                             <x-select id="status" class="block mt-1 w-full" name="status" :options="$statusOptions" :selected="$reservasi->status" required />
