@@ -13,28 +13,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-gray-900 text-white h-screen flex">
-
-    <!-- Sidebar -->
-    <aside class="w-1/4 bg-gray-800 p-8">
-        <!-- Add any sidebar content here -->
-        <p class="text-lg font-semibold">{{ $barberShop->name }}</p>
-        <p>{{ $barberShop->address }}</p>
-        <p>{{ $barberShop->description }}</p>
-        <p>{{ $barberShop->worker }}</p>
-    </aside>
-
     <!-- Main Content -->
-    <main class="flex-1 p-8">
-        <div class="max-w-md mx-auto bg-gray-800 rounded-lg shadow-md text-center">
-            <h1 class="text-3xl font-bold mb-4">{{ $barberShop->name }}</h1>
+    <main class="flex-1 p-8 flex items-center justify-center">
+        <div class="max-w-md mx-auto bg-gray-800 rounded-lg shadow-md text-center p-6">
+            <h1 class="text-4xl font-bold mb-4">{{ $barberShop->name }}</h1>
 
-            <p class="mb-4">{{ $barberShop->address }}</p>
-            <p class="mb-4">{{ $barberShop->description }}</p>
-            <p class="mb-6">{{ $barberShop->worker }}</p>
+            <p class="text-gray-400 mb-4">{{ $barberShop->address }}</p>
+            <p class="text-gray-400 mb-4">{{ $barberShop->description }}</p>
+            <p class="text-gray-400 mb-6">Number of Workers: {{ $barberShop->worker }}</p>
             
             <a href="{{ route('barbershop.edit', $barberShop) }}" class="text-blue-500 hover:underline">Edit Profile</a>
         </div>
     </main>
-
 </body>
 </html>
