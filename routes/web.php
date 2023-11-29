@@ -73,7 +73,9 @@ Route::get('/reservation-list', function () {
 Route::controller(ReservasiController::class)->group(function () {
     Route::post('/reservasi', 'store')->name('reservasi.store');
     Route::get('/reservasi', 'index');
-    Route::get('/barbershop/{barbershop}/reservasi', 'show')->name('reservasi.show');
+    Route::get('/barbershop/{barbershop}/reservasi', 'show')->name('reservasi.show')->middleware('barbershop');
+    Route::get('/barbershop/{barbershop}/reservasi/{reservasi}/edit', 'edit')->name('reservasi.edit')->middleware('barbershop');
+    Route::put('/barbershop/{barbershop}/reservasi/{reservasi}', 'update')->name('reservasi.update')->middleware('barbershop');
 });
 
 

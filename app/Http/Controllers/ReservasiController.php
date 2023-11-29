@@ -49,15 +49,23 @@ class ReservasiController extends Controller
         return view('reservation.show', ['reservations' => $reservations]);
     }
 
-    public function update(Request $request, Reservation $reservation)
+    public function edit(BarberShop $barbershop, Reservation $reservasi)
     {
+        return view('reservation.edit', compact('barbershop', 'reservasi'));
+    }
+
+    public function update(Request $request, BarberShop $barbershop, Reservation $reservasi)
+    {
+        // dd($request->all());
         $request->validate([
-            'status' => 'required',
+            'status' => 'required|in:Pending,Confirmed,Canceled,Completed',
         ]);
 
-        $reservation->update([
+        $reservasi->update([
             'status' => $request->status,
         ]);
-        return redirect()->route('reservation.show', ['reservation' => $reservation->id])->with('success', 'Status reservasi berhasil diubah.');
+
+        return redirect()->route('reservasi.show', ['barbershop' => $barbershop, 'reservasi' => $reservasi])
+            ->with('success', 'Status reservasi berhasil diubah.');
     }
 }
