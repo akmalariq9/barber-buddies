@@ -9,7 +9,7 @@
 <body class="font-sans antialiased bg-transparent">
 
     <!-- Section: Welcome -->
-    <section class="relative text-white h-screen bg-cover bg-center" style="background-image: url('{{ asset("storage/hero5.png") }}');">
+    <section class="relative text-white h-screen bg-cover bg-center" style="background-image: url('{{ asset("storage/hero.png") }}');">
         <div class="absolute top-0 left-0 right-0 text-center">
             <div class="flex justify-between items-center p-4">
                 <div>
@@ -49,7 +49,6 @@
             <p class="text-sm text-center">Effortless Booking, Expert Precision - Styled to Perfection, Booked with Ease, Your Look Defined.</p>
         </div>
     </section>    
-    
     
     <!-- Section: Features -->
     <section class="py-16 bg-black">
@@ -111,9 +110,8 @@
         </div>
     </section>
 
-
     <!-- Section: About Us -->
-    <section class="bg-cover py-20 text-center " style="background-image: url('{{ asset("storage/aboutuszz.png") }}');">
+    <section class="bg-cover py-20 text-center " style="background-image: url('{{ asset("storage/aboutus.png") }}');">
         <h2 class="text-4xl font-bold mb-8 text-white">About Us</h2>
         <p class="text-lg text-white px-80">
             BarberBuddies is dedicated to creating a seamless connection between barbers and clients.

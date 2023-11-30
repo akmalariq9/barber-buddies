@@ -11,53 +11,50 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Styles -->
-    <style>
-        body {
-            font-family: 'figtree', sans-serif;
-            background-color: #1f2937;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-    </style>
-
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-800 text-white flex flex-col items-center justify-center h-screen">
+<body class="bg-gray-800 text-white flex flex-col items-center justify-center h-screen" style="background-image: url('{{ asset("storage/bg-form2.png") }}');">
+    <div class="flex gap-6 w-fit h-fit items-center p-8 rounded-2xl shadow-xl bg-white">
+        <div class="h-96">
+            <img src="{{ asset('storage/reservation-01.png')}}" alt="Halo" class="h-full rounded-lg">
+        </div>
+        
+        <div class="h-96">
+            <form action="{{ route('reservasi.store') }}" method="POST" class="bg-inherit w-full h-full max-w-md flex flex-col justify-between">
+            @csrf
 
-    <h1 class="text-3xl font-bold mb-6">Form Reservasi</h1>
+            <label for="barber_shop_id" class="text-black font-inter font-bold text-sm" >Barber Shop:</label>
 
-    <form action="{{ route('reservasi.store') }}" method="POST" class="bg-gray-700 p-8 rounded-md shadow-md w-full max-w-2xl">
-        @csrf
+            <select name="barber_shop_id" id="barber_shop_id" required class="w-full px-4 py-2 rounded-md border bg-gray-100 text-gray-500 border-none">
+                <option value="" disabled selected>Pilih Barber Shop</option>
+                @foreach($barberShops as $barberShop)
+                    <option value="{{ $barberShop->id }}">{{ $barberShop->name }}</option>
+                @endforeach
+            </select>
 
-        <label for="barber_shop_id" class="block mb-2">Barber Shop:</label>
-        <select name="barber_shop_id" id="barber_shop_id" required class="w-full p-2 mb-4 bg-gray-800 text-white border border-gray-600 rounded-md">
-            <option value="" disabled selected>Pilih Barber Shop</option>
-            @foreach($barberShops as $barberShop)
-                <option value="{{ $barberShop->id }}">{{ $barberShop->name }}</option>
-            @endforeach
-        </select>
+            <label for="reservation_datetime" class="text-black font-inter font-bold text-sm">Reservation Datetime:</label>
+            <input type="datetime-local" name="reservation_datetime" required class="w-full px-4 py-2 rounded-md border bg-gray-100 text-gray-500 border-none">
 
-        <label for="reservation_datetime" class="block mb-2">Reservation Datetime:</label>
-        <input type="datetime-local" name="reservation_datetime" required class="w-full p-2 mb-4 bg-gray-800 text-white border border-gray-600 rounded-md">
+            <label for="service_id" class="text-black font-inter font-bold text-sm">Service:</label>
+            <select name="service_id" id="service_id" required disabled class="w-full px-4 py-2 rounded-md border bg-gray-100 text-gray-500 border-none">
+                <option value="" disabled selected>Pilih Service</option>
+                @foreach($services as $service)
+                    <option value="{{ $service->id }}" data-barbershop="{{ $service->barber_shop_id }}">{{ $service->name }}</option>
+                @endforeach
+            </select>
 
-        <label for="service_id" class="block mb-2">Service:</label>
-        <select name="service_id" id="service_id" required disabled class="w-full p-2 mb-4 bg-gray-800 text-white border border-gray-600 rounded-md">
-            <option value="" disabled selected>Pilih Service</option>
-            @foreach($services as $service)
-                <option value="{{ $service->id }}" data-barbershop="{{ $service->barber_shop_id }}">{{ $service->name }}</option>
-            @endforeach
-        </select>
+            <label for="additional_notes" class="text-black font-inter font-bold text-sm">Additional Notes:</label> 
+            <textarea name="additional_notes" required class="w-full px-4 py-2 rounded-md border bg-gray-100 text-gray-500 border-none"></textarea>
 
-        <label for="additional_notes" class="block mb-2">Additional Notes:</label>
-        <textarea name="additional_notes" required class="w-full p-2 mb-4 bg-gray-800 text-white border border-gray-600 rounded-md"></textarea>
-
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer transition duration-300 hover:bg-blue-700">Reservasi</button>
+            <div class="flex justify-center">
+                <button type="submit" class="bg-gray-800 text-white px-4 py-2 mt-4 rounded-md w-full hover:bg-gray-700 focus:outline-none focus:shadow-outline-blue">
+                    Reservasi
+                </button>
+            </div>
+        </div>
     </form>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
