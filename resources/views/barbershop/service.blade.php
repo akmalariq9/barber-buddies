@@ -13,35 +13,38 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-gray-800 h-screen flex items-center justify-center">
-
-    <form method="POST" action="{{ route('add-service') }}" class="bg-gray-700 p-6 rounded-lg shadow-md w-full max-w-md">
+<body class="h-screen flex items-center justify-center bg-cover" style="background-image: url('{{ asset("storage/bg-barber-2.png") }}');">
+    <div class="flex gap-6 w-fit h-fit items-center p-8 rounded-2xl shadow-xl bg-white">
+        <div class="h-96">
+            <img src="{{ asset('storage/service-01.png') }}" alt="Hi" class="h-full rounded-lg">
+        </div>
+        <div class="h-96">
+    <form method="POST" action="{{ route('add-service') }}" class="bg-inherit w-full h-full max-w-md flex flex-col justify-between">
         @csrf
 
-        <div class="mb-4">
-            <label for="name" class="text-white block mb-1">Service Name:</label>
-            <input type="text" name="name" required class="w-full px-4 py-2 rounded-md border bg-gray-800 text-white focus:outline-none focus:border-blue-500">
+        <div>
+            <label for="name" class="text-black font-inter font-bold text-sm">Service Name:</label>
+            <input type="text" name="name" required class="w-full px-4 py-2 rounded-md border bg-gray-100 text-gray-500 border-none">
         </div>
 
-        <div class="mb-4">
-            <label for="description" class="text-white block mb-1">Description:</label>
-            <textarea name="description" required class="w-full px-4 py-2 rounded-md border bg-gray-800 text-white focus:outline-none focus:border-blue-500"></textarea>
+        <div>
+            <label for="description" class="text-black font-inter font-bold text-sm">Description:</label>
+            <textarea name="description" required class="w-full px-4 py-2 rounded-md border bg-gray-100 text-gray-500 border-none"></textarea>
         </div>
 
-        <div class="mb-4">
-            <label for="price" class="text-white block mb-1">Price:</label>
-            <input type="number" name="price" required class="w-full px-4 py-2 rounded-md border bg-gray-800 text-white focus:outline-none focus:border-blue-500">
+        <div>
+            <label for="price" class="text-black font-inter font-bold text-sm">Price:</label>
+            <input type="number" name="price" required class="w-full px-4 py-2 rounded-md border bg-gray-100 text-gray-500 border-none">
         </div>
 
-        <div class="mb-4">
-            <label for="duration" class="text-white block mb-1">Duration:</label>
-            <input type="number" name="duration" required class="w-full px-4 py-2 rounded-md border bg-gray-800 text-white focus:outline-none focus:border-blue-500">
+        <div>
+            <label for="duration" class="text-black font-inter font-bold text-sm">Duration:</label>
+            <input type="number" name="duration" required class="w-full px-4 py-2 rounded-md border bg-gray-100 text-gray-500 border-none">
         </div>
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
+        <button type="submit" class="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:shadow-outline-blue">
             Add Service
         </button>
     </form>
-
 </body>
 </html>

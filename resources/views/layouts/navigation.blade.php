@@ -5,17 +5,58 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('landing') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                <!-- Dashboard -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboardz')" :active="request()->routeIs('dashboardz')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                
+                {{-- Setting if auth user not barbershop, then dont return below --}}
+                @if(auth()->check() && auth()->user()->role == 'Barbershop')
+                <!-- Edit Profile -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('barbershop.edit', ['barberShop' => Auth::user()->barbershop->id])" :active="request()->routeIs('barbershop.edit')">
+                        {{ __('Edit Profile') }}
+                    </x-nav-link>
+                </div>
+
+                {{-- Add Service --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('add-service')" :active="request()->routeIs('dashboard')">
+                        {{ __('Add Service') }}
+                    </x-nav-link>
+                </div>
+
+                {{-- Add Payment --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('add-payment')" :active="request()->routeIs('dashboard')">
+                        {{ __('Add Payment') }}
+                    </x-nav-link>
+                </div>
+
+                {{-- View Reservation --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('reservasi.show', ['barbershop'=> Auth::user()->barbershop->id])" :active="request()->routeIs('reservasi.show', 'reservasi.update', 'reservasi.edit')">
+                        {{ __('View Reservation') }}
+                    </x-nav-link>
+                </div>
+                @endif
+
+                @if(auth()->check() && auth()->user()->role == 'Client')
+                {{-- View Reservation --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('reservasi.showforuser', ['user'=> Auth::user()->id])" :active="request()->routeIs('reservasi.showforuser')">
+                        {{ __('View Reservation') }}
+                    </x-nav-link>
+                </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->

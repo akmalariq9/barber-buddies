@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('payment_method');
             $table->dateTime('payment_date');
+            $table->string('account_number');
             $table->foreignId('reservation_id')->constrained();
             $table->timestamps();
         });

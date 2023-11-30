@@ -74,8 +74,10 @@ Route::controller(ReservasiController::class)->group(function () {
     Route::post('/reservasi', 'store')->middleware(['auth', 'verified'])->name('reservasi.store');
     Route::get('/reservasi', 'index')->middleware(['auth', 'verified']);
     Route::get('/barbershop/{barbershop}/reservasi', 'show')->name('reservasi.show')->middleware('barbershop');
+    Route::delete('/barbershop/{barbershop}/reservasi/{reservasi}', 'destroy')->name('reservasi.destroy')->middleware('barbershop');
     Route::get('/barbershop/{barbershop}/reservasi/{reservasi}/edit', 'edit')->name('reservasi.edit')->middleware('barbershop');
     Route::put('/barbershop/{barbershop}/reservasi/{reservasi}', 'update')->name('reservasi.update')->middleware('barbershop');
+    Route::get('/user/{user}/reservasi', 'showforuser')->name('reservasi.showforuser')->middleware('auth');
 });
 
 

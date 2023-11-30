@@ -29,6 +29,6 @@ class AvailablePaymentController extends Controller
             'account_number' => $request->account_number,
             'barber_shop_id' => $barbershop->id,
         ]);
-        return redirect()->route('landing');
+        return redirect()->route('dashboardz');
     }
 }

@@ -13,7 +13,7 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="h-screen flex items-center justify-center bg-cover" style="background-image: url('{{ asset("storage/bg-form2.png") }}');">
+<body class="h-screen flex items-center justify-center bg-cover" style="background-image: url('{{ asset("storage/bg-barber-2.png") }}');">
     <div class="flex gap-6 w-fit h-fit items-center p-8 rounded-2xl shadow-xl bg-white">
         
         <div class="h-96">
@@ -54,7 +54,5 @@
             </form>
         </div>
     </div>
-    
-
 </body>
 </html>

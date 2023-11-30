@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="font-sans antialiased bg-transparent">
-
     <!-- Section: Welcome -->
     <section class="relative text-white h-screen bg-cover bg-center" style="background-image: url('{{ asset("storage/hero.png") }}');">
         <div class="absolute top-0 left-0 right-0 text-center">
@@ -22,9 +21,9 @@
                     @endguest
     
                     <!-- Include links to view and edit profile -->
-                    @if(auth()->check() && auth()->user()->barberShop)
-                        <a href="{{ route('barbershop.show', auth()->user()->barberShop) }}" class="text-white hover:underline ml-4">View Profile</a>
-                        <a href="{{ route('barbershop.edit', auth()->user()->barberShop) }}" class="text-white hover:underline ml-4">Edit Profile</a>
+                    @if(auth()->check() && auth()->user()->role == 'Barbershop')
+                        {{-- <a href="{{ route('barbershop.show', auth()->user()->barberShop) }}" class="text-white hover:underline ml-4">View Profile</a> --}}
+                        <a href="{{ route('dashboardz', auth()->user()->barberShop) }}" class="text-white hover:underline ml-4">Dashboard</a>
                         <form action="/logout" method="POST" class="inline">
                             @csrf
                             <button type="submit" class="text-white hover:underline ml-4">Logout</button>
@@ -33,8 +32,8 @@
     
                     {{-- i want to dashboard and logout if role == client --}}
                     @if(auth()->check() && auth()->user()->role == 'Client')
-                        <a href="{{ route('reservasi.store') }}" class="text-white hover:underline ml-4">Book!</a>
-                        <a href="{{ route('dashboard') }}" class="text-white hover:underline ml-4">See our Partner</a>
+                        <a href="{{ route('reservasi.store') }}" class="text-white hover:underline ml-4">Make a Reservation</a>
+                        <a href="{{ route('dashboard') }}" class="text-white hover:underline ml-4">Our Partner</a>
                         <a href="{{ route('dashboardz') }}" class="text-white hover:underline ml-4">Dashboard</a>
                         <form action="/logout" method="POST" class="inline">
                             @csrf

@@ -37,16 +37,30 @@ class ReservasiController extends Controller
         return redirect()->route('payment.form', ['reservation' => $reservation->id]);
     }
 
+    //Function to destroy or delete
+    public function destroy(BarberShop $barbershop, Reservation $reservasi)
+    {
+        // dd($reservasi);
+        $reservasi->delete();
+        $barbershopId = auth()->user()->barbershop->id;
+
+        return redirect()->route('reservasi.show', ['reservasi' => $reservasi, 'barbershop' => $barbershopId])->with('success', 'Reservasi berhasil dihapus.');
+    }
+
     public function show(Reservation $reservation)
     {
         $barbershopId = auth()->user()->barbershop->id;
-        //make $reservations get from barbershop_id to name
-        // $reservations = Reservation::where('barber_shop_id', $barbershopId)->get();
-        
         $reservations = DB::table('reservations')->join('users', 'reservations.user_id', '=', 'users.id')->select('reservations.*', 'users.name')->where('barber_shop_id', $barbershopId)->get();
 
-        // dd($reservations);
-        return view('reservation.show', ['reservations' => $reservations]);
+        return view('reservation.show', ['reservations' => $reservations, ]);
+    }
+
+    public function showforuser(Reservation $reservation)
+    {
+        $userID = auth()->user()->id;
+        $reservations = DB::table('reservations')->join('barber_shops', 'reservations.barber_shop_id', '=', 'barber_shops.id')->select('reservations.*', 'barber_shops.name')->where('reservations.user_id', $userID)->get();
+
+        return view('user.history', ['reservations' => $reservations,]);
     }
 
     public function edit(BarberShop $barbershop, Reservation $reservasi)
