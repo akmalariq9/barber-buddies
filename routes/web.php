@@ -56,6 +56,8 @@ Route::get('/barbershop/{barberShop}/edit', [BarberShopController::class, 'edit'
 Route::put('/barbershop/{barberShop}', [BarberShopController::class, 'update'])->name('barbershop.update')->middleware('barbershop');
 Route::get('/barbershop/{barberShop}', [BarberShopController::class, 'show'])->name('barbershop.show');
 
+Route::get('/{barbershop}/income', [BarberShopController::class, 'income'])->name('barbershop.income')->middleware('barbershop');
+
 Route::get('/payments/create/{reservation}', [PaymentController::class, 'create'])->name('payment.form');
 Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
 
@@ -81,10 +83,9 @@ Route::controller(ReservasiController::class)->group(function () {
     Route::get('/user/{user}/reservasi', 'showforuser')->name('reservasi.showforuser')->middleware('auth');
 });
 
-Route::get('/reservations/{reservationId}/reviews/create', [ReviewController::class, 'create'])
-->name('reviews.create');
-
-Route::post('/reservations/{reservationId}/reviews', [ReviewController::class, 'store'])
-->name('reviews.store');
+Route::controller(ReviewController::class)->group(function () {
+    Route::get('/reservations/{reservationId}/reviews/create', [ReviewController::class, 'create'])->name('reviews.create')->middleware('auth');
+    Route::post('/reservations/{reservationId}/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
+});
 
 require __DIR__.'/auth.php';

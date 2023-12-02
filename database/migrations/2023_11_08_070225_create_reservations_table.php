@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('barber_shop_id')->constrained('barber_shops');
             $table->foreignId('service_id')->constrained('services');
-            //Add total_amount for every transaction
             $table->timestamps();
         });        
     }

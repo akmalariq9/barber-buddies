@@ -6,6 +6,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barbershop;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,5 +62,16 @@ class BarbershopController extends Controller
         ]);
 
         return redirect()->route('barbershop.show', $barberShop)->with('success', 'Profile updated successfully');
+    }
+
+    public function income()
+    {
+        $barberShop = Auth::user()->barberShop->id;
+        $revenue = Reservation::where('barber_shop_id', $barberShop)->sum('total_amount');
+        // dd($revenue);
+        // dd($barberShop);
+        // $revenue = Reservation::where('barber_shop_id', $barberShop->id)->where('status', 'Completed');
+        // dd($revenue);
+        return view('barbershop.income', ['barbershop' => $barberShop, 'revenue' => $revenue]);
     }
 }

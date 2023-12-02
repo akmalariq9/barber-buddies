@@ -13,7 +13,6 @@ class ReviewController extends Controller
     {
         $reservation = Reservation::findOrFail($reservationId);
 
-        // Ensure the reservation belongs to the authenticated user
         if ($reservation->user_id !== Auth::id()) {
             abort(403, 'Unauthorized');
         }

@@ -47,6 +47,13 @@
                         {{ __('View Reservation') }}
                     </x-nav-link>
                 </div>
+                
+                {{-- View Income --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('barbershop.income', ['barbershop'=> Auth::user()->barbershop->id])" :active="request()->routeIs('barbershop.income')">
+                        {{ __('View Income') }}
+                    </x-nav-link>
+                </div>
                 @endif
 
                 @if(auth()->check() && auth()->user()->role == 'Client')

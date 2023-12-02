@@ -24,9 +24,7 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
-        //join payment table with reservation, so i can create a total amount form
         $total_amount = DB::table('payments')->join('reservations', 'payments.reservation_id', '=', 'reservations.id')->select('payments.*', 'reservations.total_amount')->where('reservation_id', $request->reservation_id)->first();
-        // $account_number = DB::table('available_payments')->select('available_payments.*')->where('id', $request->payment_method)->first();
         
         Payment::create([
             'payment_method' => $request->payment_method,
