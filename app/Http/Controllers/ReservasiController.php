@@ -50,9 +50,10 @@ class ReservasiController extends Controller
     public function show(Reservation $reservation)
     {
         $barbershopId = auth()->user()->barbershop->id;
-        $reservations = DB::table('reservations')->join('users', 'reservations.user_id', '=', 'users.id')->select('reservations.*', 'users.name')->where('barber_shop_id', $barbershopId)->get();
-
-        return view('reservation.show', ['reservations' => $reservations, ]);
+        //$reservations = DB::table('reservations')->join('users', 'reservations.user_id', '=', 'users.id')->join('reviews', 'reservations.id', '=', 'reviews.reservation_id')->select('reservations.*','reviews.rating','reviews.id', 'users.name')->where('reservations.barber_shop_id', $barbershopId)->get();
+        $reservations = Reservation::with(['user', 'review'])->where('barber_shop_id', $barbershopId)->get();
+        
+        return view('reservation.show', ['reservations' => $reservations]);
     }
 
     public function showforuser(Reservation $reservation)

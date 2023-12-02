@@ -50,7 +50,6 @@
                         Update Profile
                     </button>
                 </div>
-    
             </form>
         </div>
     </div>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('review_date');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('barber_shop_id')->constrained('barber_shops');
+            $table->foreignId('reservation_id')->constrained();
             $table->timestamps();
         });
     }

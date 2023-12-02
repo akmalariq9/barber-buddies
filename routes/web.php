@@ -14,6 +14,7 @@ use App\Http\Controllers\ServiceController;
 use App\Models\Service;
 use App\Http\Controllers\BarbershopAuthController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReviewController;
 use App\Models\AvailablePayment;
 use App\Models\Reservation;
 
@@ -58,7 +59,7 @@ Route::get('/barbershop/{barberShop}', [BarberShopController::class, 'show'])->n
 Route::get('/payments/create/{reservation}', [PaymentController::class, 'create'])->name('payment.form');
 Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
 
-Route::get('/barber', function () {
+Route::get('/barbershop', function () {
     return view('barbershop', [
         'pelanggan' =>  BarberShop::all()->collect(),
     ]);
@@ -71,8 +72,8 @@ Route::get('/reservation-list', function () {
 })->middleware('barbershop')->name('reservation-list');
 
 Route::controller(ReservasiController::class)->group(function () {
-    Route::post('/reservasi', 'store')->middleware(['auth', 'verified'])->name('reservasi.store');
-    Route::get('/reservasi', 'index')->middleware(['auth', 'verified']);
+    Route::post('/reservation', 'store')->middleware(['auth', 'verified'])->name('reservasi.store');
+    Route::get('/reservation', 'index')->middleware(['auth', 'verified']);
     Route::get('/barbershop/{barbershop}/reservasi', 'show')->name('reservasi.show')->middleware('barbershop');
     Route::delete('/barbershop/{barbershop}/reservasi/{reservasi}', 'destroy')->name('reservasi.destroy')->middleware('barbershop');
     Route::get('/barbershop/{barbershop}/reservasi/{reservasi}/edit', 'edit')->name('reservasi.edit')->middleware('barbershop');
@@ -80,5 +81,10 @@ Route::controller(ReservasiController::class)->group(function () {
     Route::get('/user/{user}/reservasi', 'showforuser')->name('reservasi.showforuser')->middleware('auth');
 });
 
+Route::get('/reservations/{reservationId}/reviews/create', [ReviewController::class, 'create'])
+->name('reviews.create');
+
+Route::post('/reservations/{reservationId}/reviews', [ReviewController::class, 'store'])
+->name('reviews.store');
 
 require __DIR__.'/auth.php';

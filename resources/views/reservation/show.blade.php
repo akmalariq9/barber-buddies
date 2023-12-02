@@ -27,18 +27,20 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date and Time</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Notes</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User Rating</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                <!-- Add a new column for Delete -->
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delete</th>
+
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 table-fixed">
                             @foreach($reservations as $reservation)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->user->name }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->status }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->reservation_datetime }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->additional_notes }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->review ? $reservation->review->rating : 'No rating'}}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('reservasi.edit', ['barbershop' => $reservation->barber_shop_id, 'reservasi' => $reservation->id]) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
                                     </td>
