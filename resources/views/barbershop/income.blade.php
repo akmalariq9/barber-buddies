@@ -8,20 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monthly Revenue</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Include any other CSS styles if needed -->
 </head>
 
-<body class="bg-gray-100">
+<body class="font-sans antialiased bg-gray-100">
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-100 leading-tight">
+                {{ __('Total Income') }}
+        </x-slot>
 
-    <div class="container mx-auto p-8 bg-white shadow-lg rounded-md mt-8">
-        <h1 class="text-3xl font-semibold mb-6">Monthly Revenue</h1>
-
-        <p class="text-lg mb-4">
-            Total Revenue for {{ now()->format('F Y') }}: {{ number_format($revenue, 2) }}
-        </p>
-        
-        <a href="/dashboard" class="text-blue-500 hover:underline">Back to Dashboard</a>
-    </div>
+            <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                <h3 class="text-2xl font-inter font-bold mb-4">Reservations for Your Barbershop</h3>
+                    <p class="text-lg mb-4">
+                        Total income till {{ now()->format('F Y') }}: {{ number_format($revenue, 2) }}
+                    </p>
+                </div>
+            </div>
+    </x-app-layout>
+</body>
 </body>
 
 </html>
