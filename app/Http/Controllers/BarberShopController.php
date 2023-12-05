@@ -64,14 +64,22 @@ class BarbershopController extends Controller
         return redirect()->route('barbershop.show', $barberShop)->with('success', 'Profile updated successfully');
     }
 
-    public function income()
+    public function income(Request $request)
     {
         $barberShop = Auth::user()->barberShop->id;
-        $revenue = Reservation::where('barber_shop_id', $barberShop)->sum('total_amount');
-        // dd($revenue);
-        // dd($barberShop);
-        // $revenue = Reservation::where('barber_shop_id', $barberShop->id)->where('status', 'Completed');
-        // dd($revenue);
-        return view('barbershop.income', ['barbershop' => $barberShop, 'revenue' => $revenue]);
+        $selectedMonth = $request->get('month', now()->month);
+
+        $revenue = Reservation::where('barber_shop_id', $barberShop)
+        ->whereMonth('reservation_datetime', $selectedMonth)
+        ->whereYear('reservation_datetime', now()->year)
+        ->where('status', 'Completed')
+        ->sum('total_amount');
+    
+        return view('barbershop.income', [
+            'barbershop' => $barberShop,
+            'revenue' => $revenue,
+            'selectedMonth' => $selectedMonth, 
+        ]);
     }
+    
 }

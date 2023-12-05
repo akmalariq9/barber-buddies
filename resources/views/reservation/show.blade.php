@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BarberBuddies</title>
+    <title>View Reservations</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('storage/favicon-01-01.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="font-sans antialiased bg-gray-100">
