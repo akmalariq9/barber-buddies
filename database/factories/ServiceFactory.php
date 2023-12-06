@@ -30,13 +30,21 @@ class ServiceFactory extends Factory
             'Hair wash and conditioning',
             'Consultation for hairstyle recommendations'
         ];
+
+        $barberid = [
+            '1',
+            '3',
+            '4',
+            '7',
+            '9'
+        ];
     
         return [
             'name' => $this->faker->randomElement($serviceNames),
             'description' => $this->faker->text,
-            'price' => $this->faker->randomFloat(2, 10, 100),
+            'price' => $this->faker->randomFloat(2, 0, 100000),
             'duration' => $this->faker->numberBetween(30, 180),
-            'barber_shop_id' => $this->faker->numberBetween(1, 20),
+            'barber_shop_id' => $this->faker->randomElement($barberid),
         ];
     }
 }

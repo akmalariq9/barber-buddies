@@ -67,7 +67,9 @@ class ProfileController extends Controller
         $reservationHistory = Reservation::where('user_id', $user)
         ->orderBy('reservation_datetime', 'desc')
         ->get();
+
+        dd($reservationHistory);
     
-        return view('user.reservation_history', ['reservationHistory' => $reservationHistory]);
+        return view('profile.partials.show-history', ['reservationHistory' => $reservationHistory]);
     }
 }

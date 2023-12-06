@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Reservation;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +13,20 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $reservations = Reservation::where('status', '!=', 'complete')->get();
+            foreach ($reservations as $reservation) {
+                $date = $reservation->reservation_datetime;
+                $date = strtotime($date);
+                $date = strtotime("+7 day", $date);
+                $date = date('Y-m-d', $date);
+                $now = date('Y-m-d');
+                if ($date < $now) {
+                    $reservation->status = 'complete';
+                    $reservation->save();
+                }
+            }
+        })->daily();
     }
 
     /**

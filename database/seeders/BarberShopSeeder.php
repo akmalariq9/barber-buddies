@@ -13,7 +13,6 @@ class BarberShopSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        BarberShop::factory(10)->create();
+        BarberShop::factory(5)->create();
     }
 }
