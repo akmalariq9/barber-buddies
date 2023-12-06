@@ -57,4 +57,16 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function history(request $request)
+    {
+        $user = Auth::user()->id;
+        //$selectedMonth = $request->get('month', now()->month);
+
+        $reservationHistory = Reservation::where('user_id', $user)
+        ->orderBy('reservation_datetime', 'desc')
+        ->get();
+    
+        return view('user.reservation_history', ['reservationHistory' => $reservationHistory]);
+    }
 }
