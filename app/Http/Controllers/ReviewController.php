@@ -33,7 +33,7 @@ class ReviewController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        if ($reservation->status !== 'Confirmed') {
+        if ($reservation->status !== 'Completed') {
             abort(403, 'Unable to review. Reservation is not completed.');
         }
 
