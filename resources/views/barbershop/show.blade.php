@@ -51,7 +51,7 @@
                 @endif
 
                 @if(auth()->check() && auth()->user()->role == 'Client')
-                <a href="{{ route('reservasi.store') }}" class="text-white bg-gray-700 py-2 rounded-lg font-inter font-semibold text-center hover:bg-gray-500">
+                <a href="{{ route('reservasi.store') }}" class="text-white bg-gray-700 py-2 mt-6 rounded-lg font-inter font-semibold text-center hover:bg-gray-500">
                     Make a Reservation
                 </a>
                 @endif      
